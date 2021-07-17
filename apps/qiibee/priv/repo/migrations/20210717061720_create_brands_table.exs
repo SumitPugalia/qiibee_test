@@ -4,11 +4,11 @@ defmodule Qiibee.Repo.Migrations.CreateBrandsTable do
   def change do
     create table(:brands, primary_key: false) do
       add :id, :uuid, primary_key: true
-      add :api_key_hash, :string, null: false
+      add :api_key, :string, null: false
 
       timestamps()
     end
 
-    create unique_index(:brands, [:api_key_hash])
+    create unique_index(:brands, [:api_key])
   end
 end
