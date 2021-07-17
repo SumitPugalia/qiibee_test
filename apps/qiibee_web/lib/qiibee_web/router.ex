@@ -17,7 +17,7 @@ defmodule QiibeeWeb.Router do
   scope "/api" do
     pipe_through :api
 
-    scope "/users", QiibeeWeb do
+    scope "/users", QiibeeWeb.User do
       post "/register", AccountsController, :register
     end
 
@@ -30,7 +30,7 @@ defmodule QiibeeWeb.Router do
 
     end
 
-    scope "/admin/users/:user_id", QiibeeWeb.Admin do
+    scope "/brand/users/:user_id", QiibeeWeb.Brand do
       pipe_through :validate_api_key
 
       get "/balance", AccountsController, :balance
