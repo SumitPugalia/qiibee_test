@@ -7,6 +7,7 @@ defmodule Qiibee.Accounts.User do
   import Ecto.Changeset
 
   alias Qiibee.Accounts.Brand
+  alias Qiibee.Wallets.Wallet
 
   @required_fields ~w(name email phone_number language brand_id)a
 
@@ -18,6 +19,7 @@ defmodule Qiibee.Accounts.User do
     field(:language, :string)
     belongs_to(:brand, Brand, type: :binary_id)
 
+    has_one :wallet, Wallet
     timestamps()
   end
 
@@ -29,5 +31,6 @@ defmodule Qiibee.Accounts.User do
     |> unique_constraint([:name, :brand_id])
     |> unique_constraint([:email, :brand_id])
     |> unique_constraint([:phone_number, :brand_id])
+    |> cast_assoc(:wallet, with: &Wallet.changeset/2, required: true)
   end
 end

@@ -9,6 +9,7 @@ defmodule Qiibee.Repo.Migrations.CreateUsersTable do
       add :phone_number, :string, null: false
       add :language, :string, null: false
       add :brand_id, references(:brands, type: :binary_id)
+
       timestamps()
     end
 
