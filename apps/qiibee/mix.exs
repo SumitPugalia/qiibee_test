@@ -37,7 +37,8 @@ defmodule Qiibee.MixProject do
   defp deps do
     [
       {:ecto_sql, "~> 3.0"},
-      {:postgrex, ">= 0.0.0"}
+      {:postgrex, ">= 0.0.0"},
+      {:bcrypt_elixir, "~> 2.0"}
     ]
   end
 
