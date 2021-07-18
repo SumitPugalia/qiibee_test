@@ -1,7 +1,7 @@
 defmodule QiibeeWeb.User.AccountsController do
   use QiibeeWeb, :controller
 
-  action_fallback QiibeeWeb.User.FallbackController
+  action_fallback QiibeeWeb.FallbackController
   alias Qiibee.Accounts
 
   def register(conn, params) do

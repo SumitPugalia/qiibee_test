@@ -39,7 +39,7 @@ defmodule QiibeeWeb.Plugs.ValidateApiKey do
 
   defp fetch_api_key(conn) do
     case get_req_header(conn, "x-api-key") do
-      [api_key] when api_key != "" > 0 ->
+      [api_key] when api_key != "" ->
         {:ok, api_key}
 
       _ ->

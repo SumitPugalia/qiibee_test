@@ -1,6 +1,5 @@
 defmodule QiibeeWeb.User.TransactionsView do
   use QiibeeWeb, :view
-  alias QiibeeWeb.User.TransactionsView
 
   ## user render_many
   def render("list.json", %{transactions: transactions}) do

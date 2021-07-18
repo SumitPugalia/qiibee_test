@@ -1,7 +1,7 @@
 defmodule QiibeeWeb.User.TransactionsController do
   use QiibeeWeb, :controller
 
-  action_fallback QiibeeWeb.User.FallbackController
+  action_fallback QiibeeWeb.FallbackController
   alias Qiibee.Wallets
 
   def history(conn, _params) do

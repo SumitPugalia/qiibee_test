@@ -28,14 +28,14 @@ defmodule QiibeeWeb.Router do
       get "/transaction_history", TransactionsController, :history
     end
 
-    # scope "/brand/users/:user_id", QiibeeWeb.Brand do
-    #   pipe_through :validate_api_key
+    scope "/brand/users/:user_id", QiibeeWeb.Brand do
+      pipe_through :validate_api_key
 
-    #   # get "/balance", AccountsController, :balance
-    #   # patch "/:points/add_points", AccountsController, :add_points
-    #   # patch "/:points/deduct_points", AccountsController, :deduct_points
-    #   # get "/transaction_history", TransactionController, :history
+      get "/balance", AccountsController, :balance
+      # patch "/:points/add_points", AccountsController, :add_points
+      # patch "/:points/deduct_points", AccountsController, :deduct_points
+      get "/transaction_history", TransactionsController, :history
 
-    # end
+    end
   end
 end

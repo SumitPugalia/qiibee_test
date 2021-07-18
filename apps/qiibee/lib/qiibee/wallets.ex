@@ -44,7 +44,7 @@ defmodule Qiibee.Wallets do
   def list_transactions(user) do
     from(t in Transaction, where: t.wallet_id == ^user.wallet.id)
     |> Repo.all()
-  end
+	end
 
   #############################################################
   # PRIVATE FUNCTIONS
