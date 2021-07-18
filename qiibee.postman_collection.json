@@ -1,0 +1,206 @@
+{
+	"info": {
+		"_postman_id": "b38de917-cb8b-4db4-b6ed-2d02e8c6370d",
+		"name": "qiibee",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "register_user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Samms",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "samms@yahoo.com",
+							"type": "text"
+						},
+						{
+							"key": "language",
+							"value": "english",
+							"type": "text"
+						},
+						{
+							"key": "phone_number",
+							"value": "9582557753",
+							"type": "text"
+						},
+						{
+							"key": "brand_id",
+							"value": "36d62855-e08e-4d83-9c8a-9d97de8083e4",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:4000/api/users/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"users",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "redeem_coupon",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer f9a8e0b9-c193-461f-8ca0-f8458de8f36c",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:4000/api/users/redeem_coupon/sEf5LrqHJ",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"users",
+						"redeem_coupon",
+						"sEf5LrqHJ"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get_reward",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer f9a8e0b9-c193-461f-8ca0-f8458de8f36c",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:4000/api/users/redeem_reward/40677975-0199-4249-a359-f82bb339dc39",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"users",
+						"redeem_reward",
+						"40677975-0199-4249-a359-f82bb339dc39"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list transactions",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer f9a8e0b9-c193-461f-8ca0-f8458de8f36c",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:4000/api/users/transaction_history",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"users",
+						"transaction_history"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get balance",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "ddebe2a0-c5aa-420e-a600-ff6850881b48",
+						"type": "text"
+					},
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:4000/api/brand/users/9545dbe9-0e00-4b10-aeb9-2b1e772880f0/balance",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"brand",
+						"users",
+						"9545dbe9-0e00-4b10-aeb9-2b1e772880f0",
+						"balance"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list users transactions",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "ddebe2a0-c5aa-420e-a600-ff6850881b48",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:4000/api/brand/users/f9a8e0b9-c193-461f-8ca0-f8458de8f36c/transaction_history",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"brand",
+						"users",
+						"f9a8e0b9-c193-461f-8ca0-f8458de8f36c",
+						"transaction_history"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
