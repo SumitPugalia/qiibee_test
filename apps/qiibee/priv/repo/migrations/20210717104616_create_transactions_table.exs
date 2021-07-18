@@ -1,6 +1,6 @@
 defmodule Qiibee.Repo.Migrations.CreateTransactionsTable do
   use Ecto.Migration
-    
+
   def change do
     Qiibee.Enums.TransactionType.create_type()
 
@@ -15,6 +15,6 @@ defmodule Qiibee.Repo.Migrations.CreateTransactionsTable do
     end
 
     create index(:transactions, [:wallet_id])
-    create unique_index(:transactions, [:wallet_id, :reference_code])
+    create index(:transactions, [:wallet_id, :reference_code])
   end
 end

@@ -11,3 +11,5 @@ config :qiibee, Qiibee.Repo,
   database: "qiibee_dev",
   hostname: "localhost",
   pool_size: 10
+
+config :qiibee, :notifications, email: Qiibee.Notifications.Email.Console

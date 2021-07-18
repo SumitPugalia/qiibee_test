@@ -6,7 +6,9 @@ defmodule Qiibee.Repo.Migrations.CreateCouponsTable do
       add :id, :uuid, primary_key: true
       add :code, :string, null: false
       add :expires_at, :utc_datetime_usec, null: false
+      add :points, :integer, null: false
       add :brand_id, references(:brands, type: :binary_id)
+
       timestamps()
     end
 

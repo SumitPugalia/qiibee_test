@@ -13,7 +13,6 @@ defmodule QiibeeWeb.Router do
     plug QiibeeWeb.Plugs.ValidateApiKey
   end
 
-
   scope "/api" do
     pipe_through :api
 
@@ -21,23 +20,22 @@ defmodule QiibeeWeb.Router do
       post "/register", AccountsController, :register
     end
 
-    scope "/users", QiibeeWeb do
+    scope "/users", QiibeeWeb.User do
       pipe_through :validate_token
 
-      patch "/redeem_coupon/:code", AccountsController, :redeem_coupon
-      patch "/redeem_reward/:patch", AccountsController, :redeem_reward
-      get "/transaction_history", TransactionController, :history
-
+      patch "/redeem_coupon/:code", CouponsController, :redeem_coupon
+      patch "/redeem_reward/:id", CouponsController, :redeem_reward
+      get "/transaction_history", TransactionsController, :history
     end
 
-    scope "/brand/users/:user_id", QiibeeWeb.Brand do
-      pipe_through :validate_api_key
+    # scope "/brand/users/:user_id", QiibeeWeb.Brand do
+    #   pipe_through :validate_api_key
 
-      get "/balance", AccountsController, :balance
-      patch "/:points/add_points", AccountsController, :add_points
-      patch "/:points/deduct_points", AccountsController, :deduct_points
-      get "/transaction_history", TransactionController, :history
+    #   # get "/balance", AccountsController, :balance
+    #   # patch "/:points/add_points", AccountsController, :add_points
+    #   # patch "/:points/deduct_points", AccountsController, :deduct_points
+    #   # get "/transaction_history", TransactionController, :history
 
-    end
+    # end
   end
 end

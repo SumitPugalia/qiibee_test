@@ -1,6 +1,6 @@
 defmodule Qiibee.Enums do
-	@moduledoc false
-	import EctoEnum
+  @moduledoc false
+  import EctoEnum
 
-	defenum(TransactionType, :transaction_type, [:debit, :credit])
+  defenum(TransactionType, :transaction_type, [:debit, :credit])
 end

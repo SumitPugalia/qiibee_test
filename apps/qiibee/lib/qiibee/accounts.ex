@@ -40,6 +40,10 @@ defmodule Qiibee.Accounts do
     end
   end
 
+  def validate_user(token) do
+    {:ok, Repo.get(User, token) |> Repo.preload([:wallet])}
+  end
+
   #############################################################
   # PRIVATE FUNCTIONS
   #############################################################

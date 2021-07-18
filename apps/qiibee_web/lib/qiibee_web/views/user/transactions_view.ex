@@ -1,0 +1,16 @@
+defmodule QiibeeWeb.User.TransactionsView do
+  use QiibeeWeb, :view
+  alias QiibeeWeb.User.TransactionsView
+
+  ## user render_many
+  def render("list.json", %{transactions: transactions}) do
+    Enum.map(transactions, fn transaction ->
+      %{
+        id: transaction.id,
+        code: transaction.reference_code,
+        type: transaction.type,
+        points: transaction.points
+      }
+    end)
+  end
+end

@@ -6,7 +6,7 @@ defmodule Qiibee.Repo.Migrations.CreateRewardsTable do
       add :id, :uuid, primary_key: true
       add :code, :string, null: false
       add :description, :string, null: false
-
+      add :points, :integer, null: false
       timestamps()
     end
 
