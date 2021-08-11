@@ -12,10 +12,10 @@ defmodule QiibeeWeb.User.CouponsController do
     end
   end
 
-  def redeem_reward(conn, %{"id" => id} = params) do
+  def redeem_point(conn, %{"id" => id} = params) do
     user = conn.assigns.current_user
 
-    with :ok <- Coupons.redeem_reward(user, id) do
+    with :ok <- Coupons.reward_coupon(user, id) do
       send_resp(conn, :no_content, "")
     end
   end

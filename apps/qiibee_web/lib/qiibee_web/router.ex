@@ -24,7 +24,7 @@ defmodule QiibeeWeb.Router do
       pipe_through :validate_token
 
       patch "/redeem_coupon/:code", CouponsController, :redeem_coupon
-      patch "/redeem_reward/:id", CouponsController, :redeem_reward
+      patch "/redeem_reward/:id", CouponsController, :redeem_point
       get "/transaction_history", TransactionsController, :history
     end
 
@@ -32,8 +32,8 @@ defmodule QiibeeWeb.Router do
       pipe_through :validate_api_key
 
       get "/balance", AccountsController, :balance
-      # patch "/:points/add_points", AccountsController, :add_points
-      # patch "/:points/deduct_points", AccountsController, :deduct_points
+      patch "/:points/add_points", AccountsController, :add_points
+      patch "/:points/deduct_points", AccountsController, :deduct_points
       get "/transaction_history", TransactionsController, :history
 
     end

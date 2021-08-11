@@ -2,8 +2,8 @@ defmodule Qiibee.Coupons do
   @moduledoc """
   Accounts context.
   """
-  alias Qiibee.Coupons.Coupon
-  alias Qiibee.Coupons.Reward
+  alias Qiibee.Coupons.RedeemCoupon
+  alias Qiibee.Coupons.RewardCoupon
   alias Qiibee.Wallets
   alias Qiibee.Repo
 
@@ -13,34 +13,34 @@ defmodule Qiibee.Coupons do
   # SERVICE LAYER - Coupons
   #############################################################
 
-  @spec create_coupon(map()) :: {:ok, Ecto.Schema.t()} | {:error, Ecto.Changeset.t()}
-  def create_coupon(attrs \\ %{}) do
-    attrs = Map.merge(attrs, %{"code" => Coupon.code_generator()})
+  @spec create_redeem_coupon(map()) :: {:ok, Ecto.Schema.t()} | {:error, Ecto.Changeset.t()}
+  def create_redeem_coupon(attrs \\ %{}) do
+    attrs = Map.merge(attrs, %{"code" => RedeemCoupon.code_generator()})
 
-    %Coupon{}
-    |> Coupon.changeset(attrs)
+    %RedeemCoupon{}
+    |> RedeemCoupon.changeset(attrs)
     |> Repo.insert()
   end
 
-  @spec create_reward(map()) :: {:ok, Ecto.Schema.t()} | {:error, Ecto.Changeset.t()}
-  def create_reward(attrs \\ %{}) do
-    attrs = Map.merge(attrs, %{"code" => Reward.code_generator()})
+  @spec create_reward_coupon(map()) :: {:ok, Ecto.Schema.t()} | {:error, Ecto.Changeset.t()}
+  def create_reward_coupon(attrs \\ %{}) do
+    attrs = Map.merge(attrs, %{"code" => RewardCoupon.code_generator()})
 
-    %Reward{}
-    |> Reward.changeset(attrs)
+    %RewardCoupon{}
+    |> RewardCoupon.changeset(attrs)
     |> Repo.insert()
   end
 
   def redeem_coupon(user, code) do
-    with {:ok, code_details} <- fetch_coupon_details(code),
+    with {:ok, code_details} <- fetch_redeem_coupon_details(code),
          :ok <- validate_code_for_user(user.wallet.id, code),
          {:ok, _} <- Wallets.add_points(user.wallet, code_details.code, code_details.points) do
       :ok
     end
   end
 
-  def redeem_reward(user, id) do
-    with {:ok, reward_details} <- fetch_reward_details(id),
+  def reward_coupon(user, id) do
+    with {:ok, reward_details} <- fetch_reward_coupon_details(id),
          {:ok, _} <-
            Wallets.deduct_points(user.wallet, reward_details.code, reward_details.points) do
       notify().send_email(user, reward_details)
@@ -54,8 +54,8 @@ defmodule Qiibee.Coupons do
     end
   end
 
-  defp fetch_coupon_details(code) do
-    case Repo.one(from c in Coupon, where: c.code == ^code) do
+  defp fetch_redeem_coupon_details(code) do
+    case Repo.one(from c in RedeemCoupon, where: c.code == ^code) do
       nil ->
         {:error, :invalid_code}
 
@@ -64,8 +64,8 @@ defmodule Qiibee.Coupons do
     end
   end
 
-  defp fetch_reward_details(id) do
-    case Repo.get(Reward, id) do
+  defp fetch_reward_coupon_details(id) do
+    case Repo.get(RewardCoupon, id) do
       nil -> {:error, :invalid_code}
       reward -> {:ok, reward}
     end

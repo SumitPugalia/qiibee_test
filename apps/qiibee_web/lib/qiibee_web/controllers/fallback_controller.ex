@@ -1,4 +1,4 @@
-defmodule QiibeeWeb.User.FallbackController do
+defmodule QiibeeWeb.FallbackController do
     @moduledoc """
     Translates controller action results into valid `Plug.Conn` responses.
   

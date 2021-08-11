@@ -1,9 +1,9 @@
-defmodule Qiibee.Coupons.Coupon do
+defmodule Qiibee.Coupons.RedeemCoupon do
   use Ecto.Schema
   import Ecto.Changeset
 
   @primary_key {:id, :binary_id, autogenerate: true}
-  schema "coupons" do
+  schema "redeems" do
     field :code, :string, unique: true
     field :expires_at, :utc_datetime_usec
     field :points, :integer

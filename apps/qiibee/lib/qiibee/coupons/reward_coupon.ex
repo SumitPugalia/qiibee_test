@@ -1,4 +1,4 @@
-defmodule Qiibee.Coupons.Reward do
+defmodule Qiibee.Coupons.RewardCoupon do
   use Ecto.Schema
   import Ecto.Changeset
 
