@@ -23,8 +23,8 @@ defmodule QiibeeWeb.Router do
     scope "/users", QiibeeWeb.User do
       pipe_through :validate_token
 
-      patch "/redeem_coupon/:code", CouponsController, :redeem_coupon
-      patch "/redeem_reward/:id", CouponsController, :redeem_point
+      patch "/coupon/redeem/:code", CouponsController, :redeem_coupon
+      patch "/coupon/reward/:reward_coupon_id", CouponsController, :redeem_point
       get "/transaction_history", TransactionsController, :history
     end
 

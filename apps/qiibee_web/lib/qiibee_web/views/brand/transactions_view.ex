@@ -6,7 +6,7 @@ defmodule QiibeeWeb.Brand.TransactionsView do
       Enum.map(transactions, fn transaction ->
         %{
           id: transaction.id,
-          code: transaction.reference_code,
+          code: transaction.coupon,
           type: transaction.type,
           points: transaction.points
         }

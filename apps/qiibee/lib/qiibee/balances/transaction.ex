@@ -15,8 +15,8 @@ defmodule Qiibee.Balances.Transaction do
   @doc false
   def changeset(transaction, attrs) do
     transaction
-    |> cast(attrs, [:points, :type, :reference_code, :user_id])
-    |> validate_required([:points, :type, :reference_code, :user_id])
-    |> assoc_constraint(:balance)
+    |> cast(attrs, [:points, :type, :coupon, :user_id, :tx_hash])
+    |> validate_required([:points, :type, :coupon, :user_id, :tx_hash])
+    |> assoc_constraint(:user)
   end
 end

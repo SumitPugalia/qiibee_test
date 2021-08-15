@@ -14,17 +14,18 @@ defmodule Qiibee.Balances do
   # SERVICE LAYER - POINTS
   #############################################################
 
-  def add_points(user_id, reference_code, points) do
+  def add_points(user_id, coupon, points) do
     tx_hash = Blockchain.credit(user_id, points)
-    add_transaction(:credit, user_id, reference_code, points, tx_hash)
+    IO.inspect(tx_hash, label: "Tx HASH")
+    add_transaction(:credit, user_id, coupon, points, tx_hash)
     :ok
   end
 
-  def deduct_points(user_id, reference_code, points) do
+  def deduct_points(user_id, coupon, points) do
     case not insufficient_balance?(user_id, points) do
       true ->
         tx_hash = Blockchain.debit(user_id, points)
-        add_transaction(:debit, user_id, reference_code, points, tx_hash)
+        add_transaction(:debit, user_id, coupon, points, tx_hash)
         :ok
       false ->
         {:error, :insufficient_balance}
@@ -33,7 +34,7 @@ defmodule Qiibee.Balances do
 
   def get_by_code_and_user(user_id, code) do
     case Repo.one(
-           from t in Transaction, where: t.reference_code == ^code and t.user_id == ^user_id
+           from t in Transaction, where: t.coupon == ^code and t.user_id == ^user_id
          ) do
       nil -> {:error, :no_txn_found}
       txn -> {:ok, txn}
@@ -49,8 +50,8 @@ defmodule Qiibee.Balances do
   # PRIVATE FUNCTIONS
   #############################################################
 
-  defp add_transaction(type, user_id, reference_code, points, tx_hash) do
-    attrs = %{type: type, user_id: user_id, reference_code: reference_code, points: points, tx_hash: tx_hash}
+  defp add_transaction(type, user_id, coupon, points, tx_hash) do
+    attrs = %{type: type, user_id: user_id, coupon: coupon, points: points, tx_hash: tx_hash}
     %Transaction{}
     |> Transaction.changeset(attrs)
     |> Repo.insert!()
@@ -58,7 +59,7 @@ defmodule Qiibee.Balances do
 
   defp insufficient_balance?(user_id, points) do
     case Repo.one(
-           from w in Wallet, where: w.user_id == ^user_id
+           from b in Balance, where: b.user_id == ^user_id
          ) do
       nil -> true
       balance -> 
