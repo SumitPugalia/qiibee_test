@@ -12,4 +12,5 @@ config :qiibee, Qiibee.Repo,
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox
 
-  config :qiibee, :blockchain, client: BlockchainMock
+config :qiibee, :blockchain, client: BlockchainMock
+config :qiibee, :producer, client: ProducerMock

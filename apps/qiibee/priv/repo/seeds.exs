@@ -36,7 +36,6 @@ IO.inspect(user, label: "CREATED USER")
 
 IO.inspect(coupon, label: "CREATED REDEEM COUPON")
 
-
 {:ok, coupon} =
   Qiibee.Coupons.create_redeem_coupon(%{
     "expires_at" => utc_datetime_usec,
@@ -63,7 +62,6 @@ IO.inspect(coupon, label: "CREATED REDEEM COUPON")
   })
 
 IO.inspect(coupon, label: "CREATED REWARD COUPON")
-
 
 {:ok, coupon} =
   Qiibee.Coupons.create_reward_coupon(%{

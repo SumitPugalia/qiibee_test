@@ -1,10 +1,12 @@
 defmodule Qiibee.Producer do
-    @moduledoc false
-    alias Qiibee.Rabbitmq
-    @queue_name "loyalty_events"
-  
-    def dispatch(event) do
-        channel = Rabbitmq.get_channel()
-        AMQP.Basic.publish(channel, "", @queue_name, event)
-    end
+  @moduledoc false
+  @callback dispatch(map()) :: any()
+
+  def dispatch(event) do
+    client().dispatch(event)
+  end
+
+  defp client() do
+    Application.fetch_env!(:qiibee, :producer)[:client]
+  end
 end

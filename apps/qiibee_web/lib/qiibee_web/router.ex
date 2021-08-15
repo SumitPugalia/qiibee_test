@@ -35,7 +35,6 @@ defmodule QiibeeWeb.Router do
       patch "/:points/add_points", AccountsController, :add_points
       patch "/:points/deduct_points", AccountsController, :deduct_points
       get "/transaction_history", TransactionsController, :history
-
     end
   end
 end

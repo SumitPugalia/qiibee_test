@@ -4,9 +4,9 @@ defmodule Qiibee.Accounts do
   """
   alias Qiibee.Accounts.Brand
   alias Qiibee.Accounts.User
-	alias Qiibee.Repo
+  alias Qiibee.Repo
 
-	import Ecto.Query, warn: false
+  import Ecto.Query, warn: false
 
   #############################################################
   # SERVICE LAYER - BRANDS
@@ -19,19 +19,19 @@ defmodule Qiibee.Accounts do
     %Brand{}
     |> Brand.changeset(attrs)
     |> Repo.insert()
-	end
+  end
 
-	def get_brand_by_api_key(api_key) do
-		case Repo.one(from b in Brand, where: b.api_key == ^api_key) do
+  def get_brand_by_api_key(api_key) do
+    case Repo.one(from b in Brand, where: b.api_key == ^api_key) do
       nil ->
         {:error, :brand_not_found}
 
       brand ->
         {:ok, brand}
     end
-	end
-	
-	def validate_brand(api_key) do
+  end
+
+  def validate_brand(api_key) do
     get_brand_by_api_key(api_key)
   end
 
@@ -54,27 +54,29 @@ defmodule Qiibee.Accounts do
       error ->
         error
     end
-	end
-	
-	def get_user(id) do
-		User
-		|> Repo.get(id) 
-		|> case do
-			nil -> {:error, :not_found}
-			user ->
-				{:ok, Repo.preload(user, [:balance])}
-			end
-	end
-	
-	def get_user_for_brand(user_id, brand_id) do
-		case Repo.one(from u in User, where: u.id == ^user_id and u.brand_id == ^brand_id) do
+  end
+
+  def get_user(id) do
+    User
+    |> Repo.get(id)
+    |> case do
+      nil ->
+        {:error, :not_found}
+
+      user ->
+        {:ok, Repo.preload(user, [:balance])}
+    end
+  end
+
+  def get_user_for_brand(user_id, brand_id) do
+    case Repo.one(from u in User, where: u.id == ^user_id and u.brand_id == ^brand_id) do
       nil ->
         {:error, :user_not_found}
 
       user ->
         {:ok, Repo.preload(user, [:balance])}
     end
-	end
+  end
 
   def validate_user(token) do
     get_user(token)

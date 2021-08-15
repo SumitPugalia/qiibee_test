@@ -25,15 +25,14 @@ defmodule Qiibee.Balances do
         tx_hash = Blockchain.debit(user_id, points)
         add_transaction(:debit, user_id, reference, points, tx_hash)
         :ok
+
       false ->
         {:error, :insufficient_balance}
     end
   end
 
   def get_by_code_and_user(user_id, code) do
-    case Repo.one(
-           from t in Transaction, where: t.coupon == ^code and t.user_id == ^user_id
-         ) do
+    case Repo.one(from t in Transaction, where: t.reference == ^code and t.user_id == ^user_id) do
       nil -> {:error, :no_txn_found}
       txn -> {:ok, txn}
     end
@@ -42,25 +41,32 @@ defmodule Qiibee.Balances do
   def list_transactions(user_id) do
     from(t in Transaction, where: t.user_id == ^user_id)
     |> Repo.all()
-	end
+  end
 
   #############################################################
   # PRIVATE FUNCTIONS
   #############################################################
 
   defp add_transaction(type, user_id, reference, points, tx_hash) do
-    attrs = %{type: type, user_id: user_id, reference: reference, points: points, tx_hash: tx_hash}
+    attrs = %{
+      type: type,
+      user_id: user_id,
+      reference: reference,
+      points: points,
+      tx_hash: tx_hash
+    }
+
     %Transaction{}
     |> Transaction.changeset(attrs)
     |> Repo.insert!()
   end
 
   defp insufficient_balance?(user_id, points) do
-    case Repo.one(
-           from b in Balance, where: b.user_id == ^user_id
-         ) do
-      nil -> true
-      balance -> 
+    case Repo.one(from b in Balance, where: b.user_id == ^user_id) do
+      nil ->
+        true
+
+      balance ->
         if balance.points < points, do: true, else: false
     end
   end

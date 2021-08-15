@@ -7,4 +7,5 @@ use Mix.Config
 config :qiibee,
   ecto_repos: [Qiibee.Repo]
 
+config :qiibee, :producer, client: Qiibee.RabbitmqWorker
 import_config "#{Mix.env()}.exs"
