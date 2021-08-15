@@ -2,7 +2,7 @@ defmodule Qiibee.Repo.Migrations.CreateCouponsTable do
   use Ecto.Migration
 
   def change do
-    create table(:coupons, primary_key: false) do
+    create table(:redeems, primary_key: false) do
       add :id, :uuid, primary_key: true
       add :code, :string, null: false
       add :expires_at, :utc_datetime_usec, null: false
@@ -12,6 +12,6 @@ defmodule Qiibee.Repo.Migrations.CreateCouponsTable do
       timestamps()
     end
 
-    create index(:coupons, [:code])
+    create index(:redeems, [:code])
   end
 end

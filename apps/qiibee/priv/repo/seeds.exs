@@ -25,14 +25,14 @@
 {:ok, utc_datetime_usec} = Ecto.Type.cast(:utc_datetime_usec, dt)
 
 {:ok, _coupon} =
-  Qiibee.Coupons.create_coupon(%{
+  Qiibee.Coupons.create_redeem_coupon(%{
     "expires_at" => utc_datetime_usec,
     "brand_id" => brand1.id,
     "points" => 100
   })
 
 {:ok, _coupon} =
-  Qiibee.Coupons.create_reward(%{
+  Qiibee.Coupons.create_reward_coupon(%{
     "description" => "15% discount on Netflix",
     "brand_id" => brand1.id,
     "points" => 150

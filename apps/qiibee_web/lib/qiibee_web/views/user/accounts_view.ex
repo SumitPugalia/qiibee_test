@@ -4,8 +4,8 @@ defmodule QiibeeWeb.User.AccountsView do
   def render("register.json", %{user: user}) do
     %{
       id: user.id,
-      wallet_id: user.wallet.id,
-      points: user.wallet.points
+      balance_id: user.balance.id,
+      points: user.balance.points
     }
   end
 end

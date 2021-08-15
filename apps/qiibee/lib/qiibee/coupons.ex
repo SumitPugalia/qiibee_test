@@ -4,8 +4,9 @@ defmodule Qiibee.Coupons do
   """
   alias Qiibee.Coupons.RedeemCoupon
   alias Qiibee.Coupons.RewardCoupon
-  alias Qiibee.Wallets
+  alias Qiibee.Balances
   alias Qiibee.Repo
+  alias Qiibee.Notifications
 
   import Ecto.Query
 
@@ -33,8 +34,8 @@ defmodule Qiibee.Coupons do
 
   def redeem_coupon(user, code) do
     with {:ok, code_details} <- fetch_redeem_coupon_details(code),
-         :ok <- validate_code_for_user(user.wallet.id, code),
-         {:ok, _} <- Wallets.add_points(user.wallet, code_details.code, code_details.points) do
+         :ok <- validate_code_for_user(user.id, code),
+         {:ok, _} <- Balances.add_points(user.id, code_details.code, code_details.points) do
       :ok
     end
   end
@@ -42,13 +43,13 @@ defmodule Qiibee.Coupons do
   def reward_coupon(user, id) do
     with {:ok, reward_details} <- fetch_reward_coupon_details(id),
          {:ok, _} <-
-           Wallets.deduct_points(user.wallet, reward_details.code, reward_details.points) do
-      notify().send_email(user, reward_details)
+           Balances.deduct_points(user.id, reward_details.code, reward_details.points) do
+      Notifications.send_email(user, reward_details)
     end
   end
 
-  defp validate_code_for_user(wallet_id, code) do
-    case Wallets.get_by_code_and_user(wallet_id, code) do
+  defp validate_code_for_user(user_id, code) do
+    case Balances.get_by_code_and_user(user_id, code) do
       {:ok, _txn} -> {:error, :already_used}
       {:error, _} -> :ok
     end
@@ -76,10 +77,5 @@ defmodule Qiibee.Coupons do
       :gt -> false
       :lt -> true
     end
-  end
-
-  ## Use Adapter Pattern to pick required module
-  defp notify() do
-    Application.fetch_env!(:qiibee, :notifications)[:email]
   end
 end

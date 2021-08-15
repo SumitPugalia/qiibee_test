@@ -6,15 +6,16 @@ defmodule Qiibee.Repo.Migrations.CreateTransactionsTable do
 
     create table(:transactions, primary_key: false) do
       add :id, :uuid, primary_key: true
-      add :reference_code, :string, null: false
+      add :coupon, :string, null: false
+      add :tx_hash, :string, null: false
       add :type, Qiibee.Enums.TransactionType.type(), null: false
       add :points, :integer, null: false
-      add :wallet_id, references(:wallets, type: :binary_id)
+      add :user_id, references(:users, type: :binary_id)
 
       timestamps()
     end
 
-    create index(:transactions, [:wallet_id])
-    create index(:transactions, [:wallet_id, :reference_code])
+    create index(:transactions, [:user_id])
+    create index(:transactions, [:user_id, :coupon])
   end
 end

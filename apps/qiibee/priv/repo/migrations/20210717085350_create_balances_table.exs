@@ -1,8 +1,8 @@
-defmodule Qiibee.Repo.Migrations.CreateWalletsTable do
+defmodule Qiibee.Repo.Migrations.CreatebalancesTable do
   use Ecto.Migration
 
   def change do
-    create table(:wallets, primary_key: false) do
+    create table(:balances, primary_key: false) do
       add :id, :uuid, primary_key: true
       add :points, :integer, null: false
       add :user_id, references(:users, type: :binary_id)
@@ -10,6 +10,6 @@ defmodule Qiibee.Repo.Migrations.CreateWalletsTable do
       timestamps()
     end
 
-    create index(:wallets, [:user_id])
+    create index(:balances, [:user_id])
   end
 end

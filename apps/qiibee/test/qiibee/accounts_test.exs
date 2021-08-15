@@ -14,7 +14,7 @@ defmodule Qiibee.AccountsTest do
   end
 
   describe "user" do
-    test "create_user/1 successfully creates new user with wallet" do
+    test "create_user/1 successfully creates new user with balance" do
       {:ok, %Brand{} = brand} = Accounts.create_brand()
 
       user_params =
@@ -24,8 +24,8 @@ defmodule Qiibee.AccountsTest do
       {:ok, %User{} = user} = Qiibee.Accounts.create_user(user_params)
 
       assert is_binary(user.id)
-      assert is_binary(user.wallet.id)
-      assert user.wallet.points == 0
+      assert is_binary(user.Balance.id)
+      assert user.Balance.points == 0
     end
 
     test "create_user/1 fails to create new user with missing params" do

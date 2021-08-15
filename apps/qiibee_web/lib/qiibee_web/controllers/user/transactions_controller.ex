@@ -2,12 +2,12 @@ defmodule QiibeeWeb.User.TransactionsController do
   use QiibeeWeb, :controller
 
   action_fallback QiibeeWeb.FallbackController
-  alias Qiibee.Wallets
+  alias Qiibee.Balances
 
   def history(conn, _params) do
     user = conn.assigns.current_user
 
-    with transactions <- Wallets.list_transactions(user) do
+    with transactions <- Balances.list_transactions(user) do
       render(conn, "list.json", transactions: transactions)
     end
   end

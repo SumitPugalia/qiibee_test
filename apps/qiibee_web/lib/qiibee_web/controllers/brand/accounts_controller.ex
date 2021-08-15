@@ -3,7 +3,7 @@ defmodule QiibeeWeb.Brand.AccountsController do
   
     action_fallback QiibeeWeb.FallbackController
     alias Qiibee.Accounts
-    alias Qiibee.Wallets
+    alias Qiibee.Balances
 
     def balance(conn, %{"user_id" => user_id} = _params) do
         brand = conn.assigns.current_brand
@@ -16,7 +16,7 @@ defmodule QiibeeWeb.Brand.AccountsController do
         brand = conn.assigns.current_brand
         with {points, _} <-  Integer.parse(points),
             {:ok, user} <- Accounts.get_user_for_brand(user_id, brand.id),
-            {:ok, _} <- Wallets.add_points(user.wallet, "ManuallyAddedByBrand", points) do
+            :ok <- Balances.add_points(user.id, "ManuallyAddedByBrand", points) do
                 send_resp(conn, 204, "")
         end
     end
@@ -25,7 +25,7 @@ defmodule QiibeeWeb.Brand.AccountsController do
         brand = conn.assigns.current_brand
         with {points, _} <-  Integer.parse(points), 
             {:ok, user} <- Accounts.get_user_for_brand(user_id, brand.id),
-            {:ok, _} <- Wallets.deduct_points(user.wallet, "ManuallyDeductedByBrand", points) do
+            :ok <- Balances.deduct_points(user.id, "ManuallyDeductedByBrand", points) do
                 send_resp(conn, 204, "")
         end
     end

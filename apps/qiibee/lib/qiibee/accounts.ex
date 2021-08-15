@@ -43,15 +43,15 @@ defmodule Qiibee.Accounts do
 
   @spec create_user(map()) :: {:ok, Ecto.Schema.t()} | {:error, Ecto.Changeset.t()}
   def create_user(attrs \\ %{}) do
-    wallet = %{"points" => 0}
-    attrs = Map.put_new(attrs, "wallet", wallet)
+    balance = %{"points" => 0}
+    attrs = Map.put_new(attrs, "balance", balance)
 
     %User{}
     |> User.changeset(attrs)
     |> Repo.insert()
     |> case do
       {:ok, user} ->
-        {:ok, Repo.preload(user, [:wallet])}
+        {:ok, Repo.preload(user, [:balance])}
 
       error ->
         error
@@ -64,7 +64,7 @@ defmodule Qiibee.Accounts do
 		|> case do
 			nil -> {:error, :not_found}
 			user ->
-				{:ok, Repo.preload(user, [:wallet])}
+				{:ok, Repo.preload(user, [:balance])}
 			end
 	end
 	
@@ -74,7 +74,7 @@ defmodule Qiibee.Accounts do
         {:error, :user_not_found}
 
       user ->
-        {:ok, Repo.preload(user, [:wallet])}
+        {:ok, Repo.preload(user, [:balance])}
     end
 	end
 

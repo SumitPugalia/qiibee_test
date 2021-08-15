@@ -12,4 +12,5 @@ config :qiibee, Qiibee.Repo,
   hostname: "localhost",
   pool_size: 10
 
-config :qiibee, :notifications, email: Qiibee.Notifications.Email.Console
+config :qiibee, :notifications, client: Qiibee.Notifications.StubClient
+config :qiibee, :blockchain, client: Qiibee.Blockchain.StubClient

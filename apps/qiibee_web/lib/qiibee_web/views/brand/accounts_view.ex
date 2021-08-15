@@ -3,7 +3,7 @@ defmodule QiibeeWeb.Brand.AccountsView do
   
     def render("balance.json", %{user: user}) do
       %{
-        points: user.wallet.points
+        points: user.balance.points
       }
     end
   end
