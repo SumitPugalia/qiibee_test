@@ -3,7 +3,6 @@ defmodule QiibeeWeb.Brand.AccountsController do
   
     action_fallback QiibeeWeb.FallbackController
     alias Qiibee.Accounts
-    alias Qiibee.Balances
 
     def balance(conn, %{"user_id" => user_id} = _params) do
         brand = conn.assigns.current_brand
@@ -15,8 +14,9 @@ defmodule QiibeeWeb.Brand.AccountsController do
     def add_points(conn, %{"user_id" => user_id, "points" => points} = _params) do
         brand = conn.assigns.current_brand
         with {points, _} <-  Integer.parse(points),
-            {:ok, user} <- Accounts.get_user_for_brand(user_id, brand.id),
-            :ok <- Balances.add_points(user.id, "ManuallyAddedByBrand", points) do
+            {:ok, user} <- Accounts.get_user_for_brand(user_id, brand.id) do
+                data = Jason.encode!(%{user_id: user.id, points: points, event: "earn_points"})
+                Qiibee.Producer.dispatch(data)
                 send_resp(conn, 204, "")
         end
     end
@@ -24,8 +24,9 @@ defmodule QiibeeWeb.Brand.AccountsController do
     def deduct_points(conn, %{"user_id" => user_id, "points" => points} = _params) do
         brand = conn.assigns.current_brand
         with {points, _} <-  Integer.parse(points), 
-            {:ok, user} <- Accounts.get_user_for_brand(user_id, brand.id),
-            :ok <- Balances.deduct_points(user.id, "ManuallyDeductedByBrand", points) do
+            {:ok, user} <- Accounts.get_user_for_brand(user_id, brand.id) do
+                data = Jason.encode!(%{user_id: user.id, points: points, event: "burn_points"})
+                Qiibee.Producer.dispatch(data)
                 send_resp(conn, 204, "")
         end
     end

@@ -1,11 +1,11 @@
 defmodule Qiibee.Notifications do
     alias Qiibee.Accounts.User
     alias Qiibee.Coupons.RewardCoupon
-    @callback send_email(%User{}, %RewardCoupon{}) :: :ok
+    @callback send_email(%RewardCoupon{}) :: :ok
 
-    @spec  send_email(User.t(), RewardCoupon.t()) :: :ok
-    def send_email(user, reward_coupon) do
-        client().send_email(user, reward_coupon)
+    @spec  send_email(RewardCoupon.t()) :: :ok
+    def send_email(reward_coupon) do
+        client().send_email(reward_coupon)
     end
 
     #############################################################

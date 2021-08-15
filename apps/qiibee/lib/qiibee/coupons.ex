@@ -32,19 +32,19 @@ defmodule Qiibee.Coupons do
     |> Repo.insert()
   end
 
-  def redeem_coupon(user, code) do
+  def redeem_coupon(user_id, code) do
     with {:ok, code_details} <- fetch_redeem_coupon_details(code),
-         :ok <- validate_code_for_user(user.id, code),
-         {:ok, _} <- Balances.add_points(user.id, code_details.code, code_details.points) do
+         :ok <- validate_code_for_user(user_id, code),
+         {:ok, _} <- Balances.add_points(user_id, code_details.code, code_details.points) do
       :ok
     end
   end
 
-  def reward_coupon(user, id) do
+  def reward_coupon(user_id, id) do
     with {:ok, reward_details} <- fetch_reward_coupon_details(id),
          {:ok, _} <-
-           Balances.deduct_points(user.id, reward_details.code, reward_details.points) do
-      Notifications.send_email(user, reward_details)
+           Balances.deduct_points(user_id, reward_details.code, reward_details.points) do
+      Notifications.send_email(user_id, reward_details)
     end
   end
 

@@ -6,17 +6,17 @@ defmodule QiibeeWeb.User.CouponsController do
 
   def redeem_coupon(conn, %{"code" => code} = params) do
     user = conn.assigns.current_user
+    data = Jason.encode!(%{user_id: user.id, code: code, event: "code_to_points"})
+    Qiibee.Producer.dispatch(data)
+    send_resp(conn, :no_content, "")
 
-    with :ok <- Coupons.redeem_coupon(user, code) do
-      send_resp(conn, :no_content, "")
-    end
   end
 
   def redeem_point(conn, %{"reward_coupon_id" => id} = params) do
     user = conn.assigns.current_user
+    data = Jason.encode!(%{user_id: user.id, id: id, event: "points_to_reward"})
+    Qiibee.Producer.dispatch(data)
+    send_resp(conn, :no_content, "")
 
-    with :ok <- Coupons.reward_coupon(user, id) do
-      send_resp(conn, :no_content, "")
-    end
   end
 end

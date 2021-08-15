@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  qiibee:
+    build: .
+    volumes:
+      - ./src:/app
+    ports:
+      - "4000:4000"
+    env_file:
+      - .docker-compose/qiibee.dev.env
+    depends_on:
+      - db
+      - rabbitmq
+
+  db:
+    image: postgres:10-alpine
+    volumes:
+      - ".docker-postgresql/volumes/postgres:/var/lib/postgresql/data"
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: postgres
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+        - 5672:5672
+        - 15672:15672
+    volumes:
+        - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+        - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    # networks:
+    #     - rabbitmq_go_net
+
+# networks:
+#   rabbitmq_go_net:
+#     driver: bridge
+
+networks:
+  default:
+    external:
+      name: local-environment

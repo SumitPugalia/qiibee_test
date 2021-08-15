@@ -38,7 +38,9 @@ defmodule Qiibee.MixProject do
     [
       {:ecto_sql, "~> 3.0"},
       {:postgrex, ">= 0.0.0"},
-      {:ecto_enum, "~> 1.2"}
+      {:ecto_enum, "~> 1.2"},
+      {:broadway_rabbitmq, "~> 0.6.0"},
+      {:mox, "~> 1.0", only: [:dev, :test]}
     ]
   end
 

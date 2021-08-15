@@ -7,7 +7,9 @@ defmodule Qiibee.Application do
 
   def start(_type, _args) do
     children = [
-      Qiibee.Repo
+      Qiibee.Repo,
+      {Qiibee.Rabbitmq, []},
+      {Qiibee.Consumer, []}
     ]
 
     Supervisor.start_link(children, strategy: :one_for_one, name: Qiibee.Supervisor)

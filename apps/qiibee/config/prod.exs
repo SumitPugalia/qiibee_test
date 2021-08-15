@@ -5,3 +5,6 @@
 use Mix.Config
 
 import_config "prod.secret.exs"
+
+config :qiibee, :notifications, client: Qiibee.Notifications.StubClient
+config :qiibee, :blockchain, client: Qiibee.Blockchain.StubClient
