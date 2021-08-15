@@ -8,7 +8,8 @@ defmodule QiibeeWeb.Brand.TransactionsView do
           id: transaction.id,
           code: transaction.coupon,
           type: transaction.type,
-          points: transaction.points
+          points: transaction.points,
+          tx_hash: transaction.tx_hash
         }
       end)
     end
