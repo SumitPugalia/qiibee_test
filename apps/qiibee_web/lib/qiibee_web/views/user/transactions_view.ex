@@ -6,7 +6,7 @@ defmodule QiibeeWeb.User.TransactionsView do
     Enum.map(transactions, fn transaction ->
       %{
         id: transaction.id,
-        code: transaction.coupon,
+        reference: transaction.reference,
         type: transaction.type,
         points: transaction.points,
         tx_hash: transaction.tx_hash
