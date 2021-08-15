@@ -11,8 +11,8 @@ There are 2 projects:
 ## STEPS:
 
 - docker-compose up [rabbitmq + postgres]
-- mix ecto.setup
-- iex -S mix phx.server [start server]
+- cd apps/qiibee && mix ecto.setup
+- cd ../.. && iex -S mix phx.server [start server]
 - mix test for tests
 
 

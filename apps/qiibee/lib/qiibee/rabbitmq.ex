@@ -23,7 +23,7 @@ defmodule Qiibee.Rabbitmq do
         {:reply, channel, state}
     end
 
-    def terminate(_reason, %{connection: connection} = state) do
+    def terminate(_reason, %{connection: connection}) do
         AMQP.Connection.close(connection)
         %{}
     end

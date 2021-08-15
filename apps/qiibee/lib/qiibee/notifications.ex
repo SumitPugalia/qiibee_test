@@ -1,5 +1,4 @@
 defmodule Qiibee.Notifications do
-    alias Qiibee.Accounts.User
     alias Qiibee.Coupons.RewardCoupon
     @callback send_email(%RewardCoupon{}) :: :ok
 

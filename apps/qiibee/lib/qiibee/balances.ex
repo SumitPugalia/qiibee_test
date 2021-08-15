@@ -2,7 +2,6 @@ defmodule Qiibee.Balances do
   @moduledoc """
   balances context.
   """
-  alias Ecto.Multi
   alias Qiibee.Balances.Transaction
   alias Qiibee.Balances.Balance
   alias Qiibee.Repo

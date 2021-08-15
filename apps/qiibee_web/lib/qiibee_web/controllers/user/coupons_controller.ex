@@ -2,9 +2,8 @@ defmodule QiibeeWeb.User.CouponsController do
   use QiibeeWeb, :controller
 
   action_fallback QiibeeWeb.FallbackController
-  alias Qiibee.Coupons
 
-  def redeem_coupon(conn, %{"code" => code} = params) do
+  def redeem_coupon(conn, %{"code" => code}) do
     user = conn.assigns.current_user
     data = Jason.encode!(%{user_id: user.id, code: code, event: "code_to_points"})
     Qiibee.Producer.dispatch(data)
@@ -12,7 +11,7 @@ defmodule QiibeeWeb.User.CouponsController do
 
   end
 
-  def redeem_point(conn, %{"reward_coupon_id" => id} = params) do
+  def redeem_point(conn, %{"reward_coupon_id" => id}) do
     user = conn.assigns.current_user
     data = Jason.encode!(%{user_id: user.id, id: id, event: "points_to_reward"})
     Qiibee.Producer.dispatch(data)

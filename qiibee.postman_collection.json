@@ -35,7 +35,7 @@
 						},
 						{
 							"key": "brand_id",
-							"value": "36d62855-e08e-4d83-9c8a-9d97de8083e4",
+							"value": "13d47421-3be9-453a-9514-498fe7473a6e",
 							"type": "text"
 						}
 					]
@@ -63,12 +63,12 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer f9a8e0b9-c193-461f-8ca0-f8458de8f36c",
+						"value": "Bearer dc6bd78d-f0be-489f-9f67-f9e13b72c449",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "http://localhost:4000/api/users/redeem_coupon/sEf5LrqHJ",
+					"raw": "http://localhost:4000/api/users/coupon/redeem/Lwt5EnHNz",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -77,8 +77,9 @@
 					"path": [
 						"api",
 						"users",
-						"redeem_coupon",
-						"sEf5LrqHJ"
+						"coupon",
+						"redeem",
+						"Lwt5EnHNz"
 					]
 				}
 			},
@@ -91,12 +92,12 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer f9a8e0b9-c193-461f-8ca0-f8458de8f36c",
+						"value": "Bearer dc6bd78d-f0be-489f-9f67-f9e13b72c449",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "http://localhost:4000/api/users/redeem_reward/40677975-0199-4249-a359-f82bb339dc39",
+					"raw": "http://localhost:4000/api/users/coupon/reward/608088bd-df82-4ed6-b509-31d03cbb9fb6",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -105,8 +106,9 @@
 					"path": [
 						"api",
 						"users",
-						"redeem_reward",
-						"40677975-0199-4249-a359-f82bb339dc39"
+						"coupon",
+						"reward",
+						"608088bd-df82-4ed6-b509-31d03cbb9fb6"
 					]
 				}
 			},
@@ -119,7 +121,7 @@
 				"header": [
 					{
 						"key": "Authorization",
-						"value": "Bearer f9a8e0b9-c193-461f-8ca0-f8458de8f36c",
+						"value": "Bearer dc6bd78d-f0be-489f-9f67-f9e13b72c449",
 						"type": "text"
 					}
 				],
@@ -146,7 +148,7 @@
 				"header": [
 					{
 						"key": "x-api-key",
-						"value": "ddebe2a0-c5aa-420e-a600-ff6850881b48",
+						"value": "77111218-36ad-4295-a220-5703066bfcb0",
 						"type": "text"
 					},
 					{
@@ -156,7 +158,7 @@
 					}
 				],
 				"url": {
-					"raw": "http://localhost:4000/api/brand/users/9545dbe9-0e00-4b10-aeb9-2b1e772880f0/balance",
+					"raw": "http://localhost:4000/api/brand/users/dc6bd78d-f0be-489f-9f67-f9e13b72c449/balance",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -166,7 +168,7 @@
 						"api",
 						"brand",
 						"users",
-						"9545dbe9-0e00-4b10-aeb9-2b1e772880f0",
+						"dc6bd78d-f0be-489f-9f67-f9e13b72c449",
 						"balance"
 					]
 				}
@@ -180,12 +182,12 @@
 				"header": [
 					{
 						"key": "x-api-key",
-						"value": "ddebe2a0-c5aa-420e-a600-ff6850881b48",
+						"value": "77111218-36ad-4295-a220-5703066bfcb0",
 						"type": "text"
 					}
 				],
 				"url": {
-					"raw": "http://localhost:4000/api/brand/users/f9a8e0b9-c193-461f-8ca0-f8458de8f36c/transaction_history",
+					"raw": "http://localhost:4000/api/brand/users/dc6bd78d-f0be-489f-9f67-f9e13b72c449/transaction_history",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -195,8 +197,68 @@
 						"api",
 						"brand",
 						"users",
-						"f9a8e0b9-c193-461f-8ca0-f8458de8f36c",
+						"dc6bd78d-f0be-489f-9f67-f9e13b72c449",
 						"transaction_history"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Points",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "ec52a63c-c63e-4d91-be8c-b1728b431bed",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:4000/api/brand/users/1e7ef64d-6102-44e1-82f6-45f00be2feb8/55/add_points",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"brand",
+						"users",
+						"1e7ef64d-6102-44e1-82f6-45f00be2feb8",
+						"55",
+						"add_points"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deduct Points",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "x-api-key",
+						"value": "77111218-36ad-4295-a220-5703066bfcb0",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:4000/api/brand/users/dc6bd78d-f0be-489f-9f67-f9e13b72c449/55/deduct_points",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"api",
+						"brand",
+						"users",
+						"dc6bd78d-f0be-489f-9f67-f9e13b72c449",
+						"55",
+						"deduct_points"
 					]
 				}
 			},

@@ -1,7 +1,7 @@
 defmodule Qiibee.Notifications.StubClient do
 
     @behaviour Qiibee.Notifications
-    alias Qiibee.Notifications
+    
     def send_email(reward) do
       IO.inspect(
         "You have successfully utilised #{reward.points} to get #{

@@ -3,7 +3,6 @@ defmodule Qiibee.Consumer do
     
     @behaviour Broadway.Acknowledger
 
-    alias Broadway.Message
     alias Qiibee.Coupons
     alias Qiibee.Balances
 
@@ -33,6 +32,11 @@ defmodule Qiibee.Consumer do
       data = Jason.decode!(message.data)
       handle_event(data)
       message
+    end
+
+    @impl true
+    def ack(_ack_ref, _success, _fail) do
+        :ok
     end
 
     defp handle_event(%{"event" => "code_to_points"} = data) do

@@ -27,7 +27,7 @@ defmodule QiibeeWeb.FallbackController do
       |> render(:"400", %{message: "Bad request"})
     end
   
-    def call(conn, err) do
+    def call(conn, _err) do
       conn
       |> put_status(:internal_server_error)
       |> put_view(QiibeeWeb.ErrorView)
