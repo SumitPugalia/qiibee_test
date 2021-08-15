@@ -22,7 +22,7 @@ IO.inspect(brand1, label: "CREATED BRAND")
     "brand_id" => brand1.id
   })
 
-IO.inspect(brand1, label: "CREATED USER")
+IO.inspect(user, label: "CREATED USER")
 
 {:ok, dt, _} = DateTime.from_iso8601("2024-01-23T23:50:07Z")
 {:ok, utc_datetime_usec} = Ecto.Type.cast(:utc_datetime_usec, dt)

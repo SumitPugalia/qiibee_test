@@ -7,4 +7,4 @@ use Mix.Config
 config :qiibee,
   ecto_repos: [Qiibee.Repo]
 
-simport_config "#{Mix.env()}.exs"
+import_config "#{Mix.env()}.exs"

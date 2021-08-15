@@ -1,17 +1,17 @@
 version: '3'
 
 services:
-  qiibee:
-    build: .
-    volumes:
-      - ./src:/app
-    ports:
-      - "4000:4000"
-    env_file:
-      - .docker-compose/qiibee.dev.env
-    depends_on:
-      - db
-      - rabbitmq
+  # qiibee:
+  #   build: .
+  #   volumes:
+  #     - ./src:/app
+  #   ports:
+  #     - "4000:4000"
+  #   env_file:
+  #     - .docker-compose/qiibee.dev.env
+  #   depends_on:
+  #     - db
+  #     - rabbitmq
 
   db:
     image: postgres:10-alpine
