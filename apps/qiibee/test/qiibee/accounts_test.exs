@@ -24,8 +24,8 @@ defmodule Qiibee.AccountsTest do
       {:ok, %User{} = user} = Qiibee.Accounts.create_user(user_params)
 
       assert is_binary(user.id)
-      assert is_binary(user.Balance.id)
-      assert user.Balance.points == 0
+      assert is_binary(user.balance.id)
+      assert user.balance.points == 0
     end
 
     test "create_user/1 fails to create new user with missing params" do

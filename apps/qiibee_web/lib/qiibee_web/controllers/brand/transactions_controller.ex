@@ -9,7 +9,7 @@ defmodule QiibeeWeb.Brand.TransactionsController do
       brand = conn.assigns.current_brand
         
       with {:ok, user} <- Accounts.get_user_for_brand(user_id, brand.id),
-        transactions <- Balances.list_transactions(user) do
+        transactions <- Balances.list_transactions(user.id) do
         render(conn, "list.json", transactions: transactions)
       end
     end

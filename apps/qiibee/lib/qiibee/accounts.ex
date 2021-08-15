@@ -31,8 +31,6 @@ defmodule Qiibee.Accounts do
     end
 	end
 	
-
-	
 	def validate_brand(api_key) do
     get_brand_by_api_key(api_key)
   end

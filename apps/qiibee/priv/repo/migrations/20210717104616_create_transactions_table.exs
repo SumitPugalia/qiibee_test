@@ -6,7 +6,7 @@ defmodule Qiibee.Repo.Migrations.CreateTransactionsTable do
 
     create table(:transactions, primary_key: false) do
       add :id, :uuid, primary_key: true
-      add :coupon, :string, null: false
+      add :reference, :string, null: false
       add :tx_hash, :string, null: false
       add :type, Qiibee.Enums.TransactionType.type(), null: false
       add :points, :integer, null: false
@@ -16,6 +16,6 @@ defmodule Qiibee.Repo.Migrations.CreateTransactionsTable do
     end
 
     create index(:transactions, [:user_id])
-    create index(:transactions, [:user_id, :coupon])
+    create index(:transactions, [:user_id, :reference])
   end
 end

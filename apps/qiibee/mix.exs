@@ -40,7 +40,9 @@ defmodule Qiibee.MixProject do
       {:postgrex, ">= 0.0.0"},
       {:ecto_enum, "~> 1.2"},
       {:broadway_rabbitmq, "~> 0.6.0"},
-      {:mox, "~> 1.0", only: [:dev, :test]}
+      {:mox, "~> 1.0", only: [:dev, :test]},
+      {:faker, "~> 0.14"},
+      {:jason, "~> 1.0"}
     ]
   end
 

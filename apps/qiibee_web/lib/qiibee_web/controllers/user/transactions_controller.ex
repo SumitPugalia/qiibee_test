@@ -7,7 +7,7 @@ defmodule QiibeeWeb.User.TransactionsController do
   def history(conn, _params) do
     user = conn.assigns.current_user
 
-    with transactions <- Balances.list_transactions(user) do
+    with transactions <- Balances.list_transactions(user.id) do
       render(conn, "list.json", transactions: transactions)
     end
   end
